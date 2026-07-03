@@ -12,7 +12,7 @@
     --surface: #F6F6F4;
     --ink: #17181A;
     --ink-soft: #6B6D70;
-    --accent: #C8102E;      /* academic crimson */
+    --accent: #C8102E;
     --accent-dark: #8C0C21;
     --line: #E7E6E2;
   }
@@ -31,7 +31,6 @@
   a { color: inherit; text-decoration: none; }
   .wrap { max-width: 1160px; margin: 0 auto; padding: 0 40px; }
 
-  /* NAV */
   nav {
     position: fixed; top: 0; left: 0; right: 0; z-index: 100;
     background: rgba(255,255,255,0.94);
@@ -45,7 +44,6 @@
   .nav-links a { color: var(--ink-soft); transition: color .2s; text-transform: uppercase; }
   .nav-links a:hover { color: var(--accent); }
 
-  /* HERO — full bleed dark */
   header.hero {
     position: relative;
     min-height: 92vh;
@@ -55,9 +53,7 @@
     color: #F4F3F0;
     overflow: hidden;
   }
-  .hero-bg-lines {
-    position: absolute; inset: 0; opacity: 0.35; pointer-events: none;
-  }
+  .hero-bg-lines { position: absolute; inset: 0; opacity: 0.35; pointer-events: none; }
   .hero-inner { position: relative; z-index: 2; }
   .hero-eyebrow {
     font-size: 12px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase;
@@ -72,9 +68,7 @@
   }
   .hero h1 .row { display: block; }
   .hero h1 .row.dim { color: #8B8D91; }
-  .hero-sub {
-    max-width: 560px; color: #C8C7C3; font-size: 15.5px; margin-bottom: 34px;
-  }
+  .hero-sub { max-width: 560px; color: #C8C7C3; font-size: 15.5px; margin-bottom: 34px; }
   .btn-outline {
     display: inline-flex; align-items: center; gap: 8px;
     border: 1px solid rgba(255,255,255,0.35); color: #F4F3F0;
@@ -83,7 +77,6 @@
   }
   .btn-outline:hover { border-color: var(--accent); color: var(--accent); }
 
-  /* SECTION SHARED */
   .section { padding: 96px 0; }
   .section.alt { background: var(--surface); }
   .section-head {
@@ -96,26 +89,23 @@
     color: var(--accent); border-bottom: 1px solid var(--accent); padding-bottom: 2px;
   }
 
-  /* RESEARCH — numbered list like reference */
   .research-list { border-top: 1px solid var(--line); }
   .research-item {
-    display: grid; grid-template-columns: 90px 1fr 140px;
-    align-items: center; gap: 24px;
+    display: grid; grid-template-columns: 44px 1fr 90px;
+    align-items: center; gap: 20px;
     padding: 34px 0; border-bottom: 1px solid var(--line);
     transition: background .2s;
   }
   .research-item:hover { background: var(--surface); }
   .research-item .num { font-size: 14px; font-weight: 700; color: var(--accent); font-variant-numeric: tabular-nums; }
-  .research-item h3 { font-size: 20px; font-weight: 700; margin: 0 0 6px; }
+  .research-item h3 { font-size: 18px; font-weight: 700; margin: 0 0 6px; line-height: 1.4; word-break: keep-all; }
   .research-item p { margin: 0; font-size: 13.5px; color: var(--ink-soft); }
   .research-item .arrow { text-align: right; font-size: 12px; font-weight: 700; color: var(--ink-soft); letter-spacing: 0.05em; }
 
-  /* stat strip under a research item */
   .stat-strip { display: flex; gap: 22px; margin-top: 10px; }
   .stat-strip .stat { font-size: 12px; color: var(--ink-soft); }
   .stat-strip .stat b { color: var(--ink); font-weight: 700; }
 
-  /* PUBLICATIONS */
   .pub-list { border-top: 1px solid var(--line); }
   .pub-item { padding: 30px 0; border-bottom: 1px solid var(--line); }
   .pub-item .year-badge {
@@ -123,27 +113,26 @@
     border: 1px solid var(--accent); border-radius: 2px; padding: 2px 8px; margin-bottom: 12px;
   }
   .pub-item h3 { font-size: 17px; font-weight: 700; margin: 0 0 8px; line-height: 1.4; }
+  .pub-item h3 a { transition: color .2s; }
+  .pub-item h3 a:hover { color: var(--accent); text-decoration: underline; }
   .pub-item .authors { font-size: 13px; color: var(--ink-soft); margin-bottom: 4px; }
-  .pub-item .venue { font-size: 12.5px; color: var(--ink-soft); font-style: italic; }
+  .pub-item .venue { font-size: 12.5px; color: var(--ink-soft); font-style: italic; margin-bottom: 10px; }
+  .pub-link { display: inline-flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 700; color: var(--accent); letter-spacing: 0.03em; }
+  .pub-link:hover { text-decoration: underline; }
 
-  /* NEWS */
   .news-list { border-top: 1px solid var(--line); }
-  .news-item {
-    display: grid; grid-template-columns: 90px 1fr; gap: 24px;
-    padding: 22px 0; border-bottom: 1px solid var(--line);
-  }
+  .news-item { display: grid; grid-template-columns: 90px 1fr; gap: 24px; padding: 22px 0; border-bottom: 1px solid var(--line); }
   .news-item .date { font-size: 12px; color: var(--ink-soft); font-weight: 600; }
   .news-item .date b { display: block; font-size: 20px; color: var(--ink); font-weight: 800; }
   .news-item p { margin: 0; font-size: 14px; }
-  .news-item p b { font-weight: 700; }
+  .news-item p b { font-weight: 700; display: block; margin-bottom: 4px; }
+  .news-item .detail { color: var(--ink-soft); font-size: 13px; }
 
-  /* ABOUT */
   .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; }
   .about-grid p { color: var(--ink-soft); font-size: 15px; margin-bottom: 16px; }
   .facts .row { display: flex; justify-content: space-between; padding: 14px 0; border-bottom: 1px solid var(--line); font-size: 13.5px; }
   .facts .row span:first-child { color: var(--ink-soft); }
 
-  /* CONTACT */
   .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: start; }
   .contact-list { display: flex; flex-direction: column; gap: 18px; }
   .contact-list .item { display: flex; gap: 14px; align-items: flex-start; }
@@ -223,19 +212,6 @@
       <h2>About</h2>
     </div>
     <div class="about-grid">
-      <div>
-        <p>
-          안녕하세요, 주은성입니다. 
-          
-          석사과정을 밟으며 웨어러블 로봇 착용을 통해 
-          사람의 발목을 보조하는 로봇을 연구하고 있습니다. 
-          특히 소프트 웨어러블 로봇의 액추에이터 성능 분석과
-          보행 시 출력 구간을 안정화시키기 위한  제어 알고리즘을
-          집중적으로 연구 중 입니다.
-        </p>
-
-        
-      </div>
       <div class="facts">
         <div class="row"><span>Education</span><span>아주대학교 기계공학과 석사과정 (2024–2026)</span></div>
         <div class="row"><span>Undergraduate</span><span>아주대학교 기계공학과 (–2024)</span></div>
@@ -243,6 +219,18 @@
         <div class="row"><span>Focus</span><span>Wearable Robot · Control</span></div>
         <div class="row"><span>Tools</span><span>CATIA V5, SolidWorks, Python</span></div>
         <div class="row"><span>Email</span><span>ysa3468@ajou.ac.kr</span></div>
+      </div>
+      <div>
+        <p>
+          안녕하세요, 주은성입니다.<br>
+          석사과정을 밟으며 웨어러블 로봇 착용을 통해<br>
+          사람의 발목을 보조하는 로봇을 연구하고 있습니다.
+        </p>
+        <p>
+          특히 소프트 웨어러블 로봇의 액추에이터 성능 분석과<br>
+          보행 시 출력 구간을 안정화시키기 위한 제어 알고리즘을<br>
+          집중적으로 연구 중입니다.
+        </p>
       </div>
     </div>
   </div>
@@ -295,15 +283,17 @@
     <div class="pub-list">
       <div class="pub-item">
         <span class="year-badge">2025</span>
-        <h3> Design and Control of Soft Robotic Wearable with SMA-based Artificial Muscle Fibers for Ankle Assistance </h3>
+        <h3><a href="https://ieeexplore.ieee.org/abstract/document/11246078" target="_blank" rel="noopener noreferrer">Design and Control of Soft Robotic Wearable with SMA-based Artificial Muscle Fibers for Ankle Assistance</a></h3>
         <div class="authors"> Eunsung Joo, Changhwan Kim, Seungbin Im, Sumin Helen Koo, Je-Sung Koh </div>
         <div class="venue"> 2025 IEEE/RSJ International Conference on intelligent robots and systems(IROS) </div>
+        <a href="https://ieeexplore.ieee.org/abstract/document/11246078" target="_blank" rel="noopener noreferrer" class="pub-link">IEEE Xplore에서 보기 →</a>
       </div>
       <div class="pub-item">
         <span class="year-badge">2024</span>
-        <h3>Development and evaluation of underwear-type wearable robotic pants for gait assistance</h3>
+        <h3><a href="https://journals.sagepub.com/doi/abs/10.1177/00405175251379085" target="_blank" rel="noopener noreferrer">Development and evaluation of underwear-type wearable robotic pants for gait assistance</a></h3>
         <div class="authors">Gayeon Lee, Jeong Eun Yoon, Ju Hyeon Oh, Soah Park, Yumin Cho, Changhwan Kim, Seungbin Im, Eunsung Joo, Sung Kyu Lee, Je-sung Koh, Sumin Helen Koo</div>
         <div class="venue">Textile Research Journal</div>
+        <a href="https://journals.sagepub.com/doi/abs/10.1177/00405175251379085" target="_blank" rel="noopener noreferrer" class="pub-link">SAGE Journals에서 보기 →</a>
       </div>
     </div>
   </div>
@@ -317,11 +307,23 @@
     <div class="news-list">
       <div class="news-item">
         <div class="date"><b>23</b>25.10</div>
-        <p><b>2025 IEEE/RSJ International Conference on intelligent robots and systems(IROS) 구두 및 포스터 발표</b> — 웨어러블 로봇의 액추에이터 및 제어 연구 결과를 발표했습니다.</p>
+        <div>
+          <p><b>2025 IEEE/RSJ International Conference on intelligent robots and systems(IROS) 구두 및 포스터 발표</b></p>
+          <p class="detail">웨어러블 로봇의 액추에이터 및 제어 연구 결과를 발표했습니다.</p>
+        </div>
       </div>
       <div class="news-item">
         <div class="date"><b>15</b>25.02</div>
-        <p><b>제20회 한국로봇종합학술대회(KRoC) 포스터 발표</b> — SMA 기반 액추에이터의 출력 특성화 연구 결과를 발표했습니다.</p>
+        <div>
+          <p><b>제어로봇시스템학회 (ICORS) 2025 학술대회 웨어러블 로봇 특별세션</b></p>
+        </div>
+      </div>
+      <div class="news-item">
+        <div class="date"><b>15</b>25.02</div>
+        <div>
+          <p><b>제20회 한국로봇종합학술대회(KRoC) 포스터 발표</b></p>
+          <p class="detail">SMA 기반 액추에이터의 출력 특성화 연구 결과를 발표했습니다.</p>
+        </div>
       </div>
     </div>
   </div>
