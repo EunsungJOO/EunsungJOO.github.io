@@ -46,79 +46,59 @@
 
   header.hero {
     position: relative;
-    min-height: 92vh;
-    display: flex; flex-direction: column; justify-content: center;
-    padding: 150px 0 70px;
-    background: radial-gradient(circle at 75% 20%, #2A2E33 0%, #101113 55%, #0A0A0B 100%);
+    min-height: 100vh;
+    display: flex; flex-direction: column; justify-content: flex-end;
+    padding: 0 0 90px;
     color: #F4F3F0;
     overflow: hidden;
   }
+  .hero-slideshow { position: absolute; inset: 0; z-index: 0; }
+  .hero-slide {
+    position: absolute; inset: 0;
+    background-size: cover;
+    background-position: center;
+    opacity: 0;
+    transition: opacity 1.6s ease;
+  }
+  .hero-slide.active { opacity: 1; }
+  .hero-overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(180deg, rgba(8,9,10,0.35) 0%, rgba(8,9,10,0.55) 55%, rgba(8,9,10,0.92) 100%);
+    z-index: 1;
+  }
   .hero-inner { position: relative; z-index: 2; }
-  .hero-grid { display: grid; grid-template-columns: 1.05fr 0.95fr; gap: 56px; align-items: center; }
   .hero-eyebrow {
     font-size: 12px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase;
-    color: var(--accent); margin-bottom: 22px;
+    color: var(--accent); margin-bottom: 20px;
   }
   .hero h1 {
-    font-size: clamp(28px, 3.6vw, 48px);
+    font-size: clamp(30px, 4.4vw, 54px);
     font-weight: 800;
-    line-height: 1.28;
+    line-height: 1.26;
     letter-spacing: -0.01em;
-    margin: 0 0 28px;
+    margin: 0 0 24px;
+    max-width: 760px;
   }
   .hero h1 .row { display: block; }
-  .hero h1 .row.dim { color: #8B8D91; }
-  .hero-sub { max-width: 520px; color: #C8C7C3; font-size: 15px; margin-bottom: 34px; }
+  .hero h1 .row.dim { color: #B9B8B5; }
+  .hero-sub { max-width: 540px; color: #D6D5D1; font-size: 15.5px; margin-bottom: 32px; }
+  .hero-bottom { display: flex; justify-content: space-between; align-items: flex-end; gap: 24px; flex-wrap: wrap; }
   .btn-outline {
     display: inline-flex; align-items: center; gap: 8px;
-    border: 1px solid rgba(255,255,255,0.35); color: #F4F3F0;
+    border: 1px solid rgba(255,255,255,0.4); color: #F4F3F0;
     padding: 11px 20px; font-size: 12.5px; font-weight: 700; letter-spacing: 0.06em;
     text-transform: uppercase; border-radius: 2px; transition: all .2s;
   }
   .btn-outline:hover { border-color: var(--accent); color: var(--accent); }
-
-  .hero-gallery { position: relative; height: 480px; }
-  .gal-main {
-    position: absolute;
-    top: 0; left: 40px; right: 0;
-    height: 340px;
-    border-radius: 8px;
-    overflow: hidden;
-    box-shadow: 0 30px 60px rgba(0,0,0,0.45);
-    z-index: 2;
+  .slide-dots { display: flex; gap: 10px; align-items: center; }
+  .slide-dots .dot {
+    width: 24px; height: 3px; background: rgba(255,255,255,0.3);
+    cursor: pointer; transition: background .3s;
   }
-  .gal-main::before {
-    content: "";
-    position: absolute;
-    top: -14px; left: -14px; right: 14px; bottom: 14px;
-    border: 1px solid rgba(200,16,46,0.55);
-    border-radius: 8px;
-    z-index: -1;
-  }
-  .gal-main img, .gal-sub img { width: 100%; height: 100%; object-fit: cover; display: block; }
-  .gal-tag {
-    position: absolute; left: 16px; bottom: 16px;
-    background: rgba(10,10,11,0.75); backdrop-filter: blur(4px);
-    color: #F4F3F0; font-size: 11px; font-weight: 700; letter-spacing: 0.06em;
-    text-transform: uppercase; padding: 7px 12px; border-radius: 3px;
-    border-left: 2px solid var(--accent);
-    z-index: 3;
-  }
-  .gal-sub {
-    position: absolute;
-    bottom: 0; right: 20px;
-    width: 62%; height: 220px;
-    border-radius: 8px;
-    overflow: hidden;
-    box-shadow: 0 24px 46px rgba(0,0,0,0.5);
-    border: 4px solid #0A0A0B;
-    z-index: 3;
-  }
-
-  @media (max-width: 900px) {
-    .hero-grid { grid-template-columns: 1fr; }
-    .hero-gallery { height: 360px; margin-top: 40px; }
-    .gal-main { left: 0; height: 260px; }
+  .slide-dots .dot.active { background: var(--accent); }
+  .slide-caption {
+    font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase;
+    color: rgba(255,255,255,0.7); margin-bottom: 10px;
   }
 
   .section { padding: 96px 0; }
@@ -227,30 +207,29 @@
 </nav>
 
 <header class="hero">
-  <div class="wrap hero-inner">
-    <div class="hero-grid">
-      <div>
-        <div class="hero-eyebrow">MIRR LAB</div>
-        <h1>
-          <span class="row">사람의 발목을 보조하는</span>
-          <span class="row dim">의복형 웨어러블 로봇을</span>
-          <span class="row">설계합니다</span>
-        </h1>
-        <p class="hero-sub">
-          형상기억합금(SMA) 기반 의복형 웨어러블 로봇 설계와 
-          보행 시 출력 안정화를 위한 제어 알고리즘을 연구합니다.
-        </p>
-        <a href="#research" class="btn-outline">View Research →</a>
-      </div>
+  <div class="hero-slideshow">
+    <div class="hero-slide active" style="background-image:url('images/wearing-test.png');"></div>
+    <div class="hero-slide" style="background-image:url('images/mannequin.png');"></div>
+  </div>
+  <div class="hero-overlay"></div>
 
-      <div class="hero-gallery">
-        <div class="gal-main">
-          <img src="images/wearing-test.png" alt="웨어러블 로봇 실착용 테스트">
-        </div>
-        <span class="gal-tag">FIELD TEST · 2025</span>
-        <div class="gal-sub">
-          <img src="images/mannequin.png" alt="웨어러블 로봇 마네킹 착용 사진">
-        </div>
+  <div class="wrap hero-inner">
+    <div class="slide-caption" id="slideCaption">FIELD TEST · 2025</div>
+    <div class="hero-eyebrow">MIRR LAB</div>
+    <h1>
+      <span class="row">사람의 발목을 보조하는</span>
+      <span class="row dim">의복형 웨어러블 로봇을</span>
+      <span class="row">설계합니다</span>
+    </h1>
+    <p class="hero-sub">
+      형상기억합금(SMA) 기반 의복형 웨어러블 로봇 설계와 
+      보행 시 출력 안정화를 위한 제어 알고리즘을 연구합니다.
+    </p>
+    <div class="hero-bottom">
+      <a href="#research" class="btn-outline">View Research →</a>
+      <div class="slide-dots" id="slideDots">
+        <span class="dot active" data-i="0"></span>
+        <span class="dot" data-i="1"></span>
       </div>
     </div>
   </div>
@@ -407,6 +386,39 @@
     entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); });
   }, { threshold: 0.1 });
   els.forEach(el => io.observe(el));
+
+  // Hero slideshow
+  const slides = document.querySelectorAll('.hero-slide');
+  const dots = document.querySelectorAll('.slide-dots .dot');
+  const captions = ['FIELD TEST · 2025', 'MANNEQUIN FITTING TEST'];
+  const captionEl = document.getElementById('slideCaption');
+  let current = 0;
+  let timer;
+
+  function showSlide(i) {
+    slides.forEach((s, idx) => s.classList.toggle('active', idx === i));
+    dots.forEach((d, idx) => d.classList.toggle('active', idx === i));
+    if (captionEl && captions[i]) captionEl.textContent = captions[i];
+    current = i;
+  }
+
+  function nextSlide() {
+    showSlide((current + 1) % slides.length);
+  }
+
+  function startAutoplay() {
+    clearInterval(timer);
+    timer = setInterval(nextSlide, 4500);
+  }
+
+  dots.forEach(dot => {
+    dot.addEventListener('click', () => {
+      showSlide(parseInt(dot.dataset.i, 10));
+      startAutoplay();
+    });
+  });
+
+  if (slides.length > 1) startAutoplay();
 </script>
 
 </body>
