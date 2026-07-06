@@ -45,60 +45,83 @@
   .nav-links a:hover { color: var(--accent); }
 
   header.hero {
-    position: relative;
+    display: grid; grid-template-columns: 44% 56%;
     min-height: 100vh;
-    display: flex; flex-direction: column; justify-content: flex-end;
-    padding: 0 0 90px;
+  }
+  .hero-left {
+    background: #0A0A0B;
     color: #F4F3F0;
-    overflow: hidden;
+    padding: 160px 48px 60px;
+    display: flex; flex-direction: column; justify-content: center;
   }
-  .hero-slideshow { position: absolute; inset: 0; z-index: 0; }
-  .hero-slide {
-    position: absolute; inset: 0;
-    background-size: cover;
-    background-position: center;
-    opacity: 0;
-    transition: opacity 1.6s ease;
-  }
-  .hero-slide.active { opacity: 1; }
-  .hero-overlay {
-    position: absolute; inset: 0;
-    background: linear-gradient(180deg, rgba(8,9,10,0.35) 0%, rgba(8,9,10,0.55) 55%, rgba(8,9,10,0.92) 100%);
-    z-index: 1;
-  }
-  .hero-inner { position: relative; z-index: 2; }
   .hero-eyebrow {
     font-size: 12px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase;
     color: var(--accent); margin-bottom: 20px;
   }
   .hero h1 {
-    font-size: clamp(30px, 4.4vw, 54px);
+    font-size: clamp(28px, 3vw, 42px);
     font-weight: 800;
-    line-height: 1.26;
+    line-height: 1.28;
     letter-spacing: -0.01em;
     margin: 0 0 24px;
-    max-width: 760px;
   }
   .hero h1 .row { display: block; }
-  .hero h1 .row.dim { color: #B9B8B5; }
-  .hero-sub { max-width: 540px; color: #D6D5D1; font-size: 15.5px; margin-bottom: 32px; }
-  .hero-bottom { display: flex; justify-content: space-between; align-items: flex-end; gap: 24px; flex-wrap: wrap; }
+  .hero h1 .row.dim { color: #8B8D91; }
+  .hero-sub { max-width: 420px; color: #C8C7C3; font-size: 15px; margin-bottom: 32px; }
   .btn-outline {
-    display: inline-flex; align-items: center; gap: 8px;
-    border: 1px solid rgba(255,255,255,0.4); color: #F4F3F0;
+    display: inline-flex; align-items: center; gap: 8px; align-self: flex-start;
+    border: 1px solid rgba(255,255,255,0.35); color: #F4F3F0;
     padding: 11px 20px; font-size: 12.5px; font-weight: 700; letter-spacing: 0.06em;
     text-transform: uppercase; border-radius: 2px; transition: all .2s;
   }
   .btn-outline:hover { border-color: var(--accent); color: var(--accent); }
-  .slide-dots { display: flex; gap: 10px; align-items: center; }
+
+  .hero-right { position: relative; background: #17181B; overflow: hidden; }
+  .hero-right::before {
+    content: "";
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(circle at 30% 20%, rgba(255,255,255,0.04), transparent 55%),
+      radial-gradient(circle at 80% 85%, rgba(200,16,46,0.08), transparent 50%);
+    pointer-events: none;
+  }
+  .photo-slide {
+    position: absolute; inset: 0;
+    display: flex; align-items: center; justify-content: center;
+    padding: 56px;
+    opacity: 0;
+    transition: opacity 1.4s ease;
+  }
+  .photo-slide.active { opacity: 1; }
+  .photo-slide img {
+    max-width: 100%; max-height: 100%;
+    width: auto; height: auto;
+    object-fit: contain;
+    border-radius: 4px;
+    box-shadow: 0 40px 80px rgba(0,0,0,0.55);
+  }
+  .photo-caption {
+    position: absolute; left: 32px; bottom: 28px; z-index: 3;
+    font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;
+    color: rgba(255,255,255,0.8);
+    background: rgba(10,10,11,0.6); backdrop-filter: blur(4px);
+    padding: 7px 12px; border-radius: 3px;
+    border-left: 2px solid var(--accent);
+  }
+  .slide-dots {
+    position: absolute; right: 32px; bottom: 32px; z-index: 3;
+    display: flex; gap: 10px; align-items: center;
+  }
   .slide-dots .dot {
-    width: 24px; height: 3px; background: rgba(255,255,255,0.3);
+    width: 22px; height: 3px; background: rgba(255,255,255,0.3);
     cursor: pointer; transition: background .3s;
   }
   .slide-dots .dot.active { background: var(--accent); }
-  .slide-caption {
-    font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase;
-    color: rgba(255,255,255,0.7); margin-bottom: 10px;
+
+  @media (max-width: 900px) {
+    header.hero { grid-template-columns: 1fr; }
+    .hero-left { padding: 130px 32px 40px; }
+    .hero-right { height: 60vh; }
   }
 
   .section { padding: 96px 0; }
@@ -207,14 +230,7 @@
 </nav>
 
 <header class="hero">
-  <div class="hero-slideshow">
-    <div class="hero-slide active" style="background-image:url('images/wearing-test.png');"></div>
-    <div class="hero-slide" style="background-image:url('images/mannequin.png');"></div>
-  </div>
-  <div class="hero-overlay"></div>
-
-  <div class="wrap hero-inner">
-    <div class="slide-caption" id="slideCaption">FIELD TEST · 2025</div>
+  <div class="hero-left">
     <div class="hero-eyebrow">MIRR LAB</div>
     <h1>
       <span class="row">사람의 발목을 보조하는</span>
@@ -225,12 +241,20 @@
       형상기억합금(SMA) 기반 의복형 웨어러블 로봇 설계와 
       보행 시 출력 안정화를 위한 제어 알고리즘을 연구합니다.
     </p>
-    <div class="hero-bottom">
-      <a href="#research" class="btn-outline">View Research →</a>
-      <div class="slide-dots" id="slideDots">
-        <span class="dot active" data-i="0"></span>
-        <span class="dot" data-i="1"></span>
-      </div>
+    <a href="#research" class="btn-outline">View Research →</a>
+  </div>
+
+  <div class="hero-right">
+    <div class="photo-slide active">
+      <img src="images/wearing-test.png" alt="웨어러블 로봇 실착용 테스트">
+    </div>
+    <div class="photo-slide">
+      <img src="images/mannequin.png" alt="웨어러블 로봇 마네킹 착용 사진">
+    </div>
+    <div class="photo-caption" id="slideCaption">FIELD TEST · 2025</div>
+    <div class="slide-dots" id="slideDots">
+      <span class="dot active" data-i="0"></span>
+      <span class="dot" data-i="1"></span>
     </div>
   </div>
 </header>
@@ -388,7 +412,7 @@
   els.forEach(el => io.observe(el));
 
   // Hero slideshow
-  const slides = document.querySelectorAll('.hero-slide');
+  const slides = document.querySelectorAll('.photo-slide');
   const dots = document.querySelectorAll('.slide-dots .dot');
   const captions = ['FIELD TEST · 2025', 'MANNEQUIN FITTING TEST'];
   const captionEl = document.getElementById('slideCaption');
