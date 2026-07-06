@@ -47,20 +47,20 @@
   header.hero {
     position: relative;
     min-height: 92vh;
-    display: flex; flex-direction: column; justify-content: flex-end;
-    padding: 140px 0 70px;
+    display: flex; flex-direction: column; justify-content: center;
+    padding: 150px 0 70px;
     background: radial-gradient(circle at 75% 20%, #2A2E33 0%, #101113 55%, #0A0A0B 100%);
     color: #F4F3F0;
     overflow: hidden;
   }
-  .hero-bg-lines { position: absolute; inset: 0; opacity: 0.35; pointer-events: none; }
   .hero-inner { position: relative; z-index: 2; }
+  .hero-grid { display: grid; grid-template-columns: 1.05fr 0.95fr; gap: 56px; align-items: center; }
   .hero-eyebrow {
     font-size: 12px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase;
     color: var(--accent); margin-bottom: 22px;
   }
   .hero h1 {
-    font-size: clamp(30px, 4.6vw, 56px);
+    font-size: clamp(28px, 3.6vw, 48px);
     font-weight: 800;
     line-height: 1.28;
     letter-spacing: -0.01em;
@@ -68,7 +68,7 @@
   }
   .hero h1 .row { display: block; }
   .hero h1 .row.dim { color: #8B8D91; }
-  .hero-sub { max-width: 560px; color: #C8C7C3; font-size: 15.5px; margin-bottom: 34px; }
+  .hero-sub { max-width: 520px; color: #C8C7C3; font-size: 15px; margin-bottom: 34px; }
   .btn-outline {
     display: inline-flex; align-items: center; gap: 8px;
     border: 1px solid rgba(255,255,255,0.35); color: #F4F3F0;
@@ -76,6 +76,50 @@
     text-transform: uppercase; border-radius: 2px; transition: all .2s;
   }
   .btn-outline:hover { border-color: var(--accent); color: var(--accent); }
+
+  .hero-gallery { position: relative; height: 480px; }
+  .gal-main {
+    position: absolute;
+    top: 0; left: 40px; right: 0;
+    height: 340px;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 30px 60px rgba(0,0,0,0.45);
+    z-index: 2;
+  }
+  .gal-main::before {
+    content: "";
+    position: absolute;
+    top: -14px; left: -14px; right: 14px; bottom: 14px;
+    border: 1px solid rgba(200,16,46,0.55);
+    border-radius: 8px;
+    z-index: -1;
+  }
+  .gal-main img, .gal-sub img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .gal-tag {
+    position: absolute; left: 16px; bottom: 16px;
+    background: rgba(10,10,11,0.75); backdrop-filter: blur(4px);
+    color: #F4F3F0; font-size: 11px; font-weight: 700; letter-spacing: 0.06em;
+    text-transform: uppercase; padding: 7px 12px; border-radius: 3px;
+    border-left: 2px solid var(--accent);
+    z-index: 3;
+  }
+  .gal-sub {
+    position: absolute;
+    bottom: 0; right: 20px;
+    width: 62%; height: 220px;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 24px 46px rgba(0,0,0,0.5);
+    border: 4px solid #0A0A0B;
+    z-index: 3;
+  }
+
+  @media (max-width: 900px) {
+    .hero-grid { grid-template-columns: 1fr; }
+    .hero-gallery { height: 360px; margin-top: 40px; }
+    .gal-main { left: 0; height: 260px; }
+  }
 
   .section { padding: 96px 0; }
   .section.alt { background: var(--surface); }
@@ -183,26 +227,32 @@
 </nav>
 
 <header class="hero">
-  <svg class="hero-bg-lines" viewBox="0 0 1200 800" preserveAspectRatio="xMidYMid slice">
-    <g stroke="#3A3D42" stroke-width="1" fill="none">
-      <path d="M100 700 Q 400 500 700 620 T 1150 500"/>
-      <path d="M0 500 Q 350 650 650 480 T 1200 550"/>
-      <circle cx="850" cy="230" r="120" stroke="#4A4E55"/>
-      <circle cx="850" cy="230" r="200" stroke="#2E3136"/>
-    </g>
-  </svg>
   <div class="wrap hero-inner">
-    <div class="hero-eyebrow">MIRR LAB</div>
-    <h1>
-      <span class="row">사람의 발목을 보조하는</span>
-      <span class="row dim">의복형 웨어러블 로봇을</span>
-      <span class="row">설계합니다</span>
-    </h1>
-    <p class="hero-sub">
-      형상기억합금(SMA) 기반 의복형 웨어러블 로봇 설계와 
-      보행 시 출력 안정화를 위한 제어 알고리즘을 연구합니다.
-    </p>
-    <a href="#research" class="btn-outline">View Research →</a>
+    <div class="hero-grid">
+      <div>
+        <div class="hero-eyebrow">MIRR LAB</div>
+        <h1>
+          <span class="row">사람의 발목을 보조하는</span>
+          <span class="row dim">의복형 웨어러블 로봇을</span>
+          <span class="row">설계합니다</span>
+        </h1>
+        <p class="hero-sub">
+          형상기억합금(SMA) 기반 의복형 웨어러블 로봇 설계와 
+          보행 시 출력 안정화를 위한 제어 알고리즘을 연구합니다.
+        </p>
+        <a href="#research" class="btn-outline">View Research →</a>
+      </div>
+
+      <div class="hero-gallery">
+        <div class="gal-main">
+          <img src="images/wearing-test.png" alt="웨어러블 로봇 실착용 테스트">
+        </div>
+        <span class="gal-tag">FIELD TEST · 2025</span>
+        <div class="gal-sub">
+          <img src="images/mannequin.png" alt="웨어러블 로봇 마네킹 착용 사진">
+        </div>
+      </div>
+    </div>
   </div>
 </header>
 
